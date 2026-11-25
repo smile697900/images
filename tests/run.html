@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>동기화 엔진 자동 테스트</title>
+  <style>
+    body { background: #0f172a; color: #e2e8f0; font-family: -apple-system, "Noto Sans KR", sans-serif; padding: 18px; }
+    h1 { font-size: 1rem; margin-bottom: 8px; }
+    #summary { font-weight: 700; margin-bottom: 10px; }
+    pre { background: #111827; border: 1px solid #334155; border-radius: 8px; padding: 12px; font-size: 12px; line-height: 1.5; white-space: pre-wrap; word-break: break-all; }
+  </style>
+</head>
+<body>
+  <h1>원스텝 보드 · PC↔폰 동기화 엔진 자동 테스트</h1>
+  <div id="summary">실행 중…</div>
+  <pre id="result">…</pre>
+  <script src="../sync.js"></script>
+  <script src="mock-github.js"></script>
+  <script src="suite.js"></script>
+  <script>
+    window.addEventListener('load', function () {
+      Promise.resolve().then(runSyncTests).catch(function (e) {
+        document.getElementById('summary').textContent = '❌ 테스트 실행 오류: ' + (e && e.message);
+        document.getElementById('result').textContent = (e && e.stack) || String(e);
+      });
+    });
+  </script>
+</body>
+</html>
